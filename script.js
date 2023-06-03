@@ -30,7 +30,7 @@ console.log(slider.value);
     let isMouseup=true;
     let computedstyle=getComputedStyle(container);
     let bgColor=computedstyle.backgroundColor;
-
+    let shader;
    
   function draw(){
     
@@ -73,9 +73,11 @@ console.log(slider.value);
          
          divEle.style.width= Cwidth/input +'px';
          divEle.style.height= Cheight/input+'px';
+         
            
          for(let i=0; i<x;i++){
             let clonedChild = divEle.cloneNode(true);
+          
             container.appendChild(clonedChild);
             }
                if(currentMode==='color')           
@@ -84,6 +86,11 @@ console.log(slider.value);
                 rainbow();}
                 else if(currentMode==='eraser'){
                     erase();
+                }
+                else if(currentMode==='darker'){
+                    darker();
+                } else if(currentMode==='darker'){
+                    lighter();
                 }
            
                            
@@ -178,6 +185,7 @@ function rainbow(){
     grids.forEach(function(grid) {
       grid.addEventListener('mousedown', function() {
         isMouseDown = true;
+      
         grid.style.backgroundColor = getRandomRgbColor();
     })
         
@@ -195,10 +203,119 @@ function rainbow(){
       currentMode='rainbow';
 
 }
-function darker(){
-    
-}
+let rgbRegex = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/;
+let updatedRed;
+let updatedGreen ;
+let updatedBlue ;
+      
+let updatedColor;
 
+let incrementRed;
+let incrementGreen ;
+let incrementBlue ;
+function darker() {
+    let grids = document.querySelectorAll('.grid');
+   
+    grids.forEach(function(grid) {
+        let c = getComputedStyle(grid).backgroundColor;
+        if(c==='rgba(0, 0, 0, 0)'){
+            c=bgColor;
+            console.log('nulllllll')
+        }
+      grid.addEventListener('mousedown', function() {
+        isMouseDown = true;
+       
+        console.log(c);
+            let [, r, g, b] = rgbRegex.exec(c);
+            incrementRed = Math.floor(0.1 * parseInt(r));
+            incrementGreen = Math.floor(0.1 * parseInt(g));
+            incrementBlue = Math.floor(0.1 * parseInt(b));
+            updatedRed = Math.min(parseInt(r) - incrementRed, 255);
+            updatedGreen = Math.min(parseInt(g) - incrementGreen, 255);
+            updatedBlue = Math.min(parseInt(b) - incrementBlue, 255);
+         
+           updatedColor = `rgb(${updatedRed}, ${updatedGreen}, ${updatedBlue})`;
+          grid.style.backgroundColor = updatedColor;
+          c = updatedColor;
+          console.log(c);
+      });
+  
+      grid.addEventListener('mouseup', function() {
+        isMouseDown = false;
+      });
+  
+      grid.addEventListener('mouseenter', function() {
+        if (isMouseDown) {
+            console.log(c)
+            let [, r, g, b] = rgbRegex.exec(c);
+            incrementRed = Math.floor(0.1 * parseInt(r));
+            incrementGreen = Math.floor(0.1 * parseInt(g));
+            incrementBlue = Math.floor(0.1 * parseInt(b));
+            updatedRed = Math.min(parseInt(r) - incrementRed, 255);
+            updatedGreen = Math.min(parseInt(g) - incrementGreen, 255);
+            updatedBlue = Math.min(parseInt(b) - incrementBlue, 255);
+         
+           updatedColor = `rgb(${updatedRed}, ${updatedGreen}, ${updatedBlue})`;
+          grid.style.backgroundColor = updatedColor;
+          c = updatedColor;
+        }
+      });
+    });
+  
+    currentMode = 'darker';
+  }
+  
+function lighter(){
+    let grids = document.querySelectorAll('.grid');
+   
+    grids.forEach(function(grid) {
+        let c = getComputedStyle(grid).backgroundColor;
+        if(c==='rgba(0, 0, 0, 0)'){
+            c=bgColor;
+            console.log('nulllllll')
+        }
+      grid.addEventListener('mousedown', function() {
+        isMouseDown = true;
+        
+        console.log(c);
+            let [, r, g, b] = rgbRegex.exec(c);
+            incrementRed = Math.round(0.2 * (255 - parseInt(r)));
+            incrementGreen = Math.round(0.2 * (255 - parseInt(g)));
+                incrementBlue = Math.round(0.2 * (255 - parseInt(b)));
+            updatedRed = Math.min(parseInt(r) + incrementRed, 255);
+            updatedGreen = Math.min(parseInt(g) + incrementGreen, 255);
+            updatedBlue = Math.min(parseInt(b) + incrementBlue, 255);
+         
+           updatedColor = `rgb(${updatedRed}, ${updatedGreen}, ${updatedBlue})`;
+          grid.style.backgroundColor = updatedColor;
+          c = updatedColor;
+          console.log(c);
+      });
+  
+      grid.addEventListener('mouseup', function() {
+        isMouseDown = false;
+      });
+  
+      grid.addEventListener('mouseenter', function() {
+        if (isMouseDown) {
+          
+            let [, r, g, b] = rgbRegex.exec(c);
+            incrementRed = Math.round(0.2 * (255 - parseInt(r)));
+        incrementGreen = Math.round(0.2 * (255 - parseInt(g)));
+            incrementBlue = Math.round(0.2 * (255 - parseInt(b)));
+            updatedRed = Math.min(parseInt(r) + incrementRed, 255);
+            updatedGreen = Math.min(parseInt(g) + incrementGreen, 255);
+            updatedBlue = Math.min(parseInt(b) + incrementBlue, 255);
+         
+           updatedColor = `rgb(${updatedRed}, ${updatedGreen}, ${updatedBlue})`;
+          grid.style.backgroundColor = updatedColor;
+          c = updatedColor;
+        }
+      });
+    });
+  
+    currentMode = 'lighter';
+}
     
     painBtn.onclick = ()=> setCurrenMode('color');
     eraserBtn.onclick = ()=> setCurrenMode('erase');
@@ -208,10 +325,10 @@ function darker(){
     
     eraserBtn.addEventListener('click',erase);
     clearBtn.addEventListener('click',clear);
-    painBtn.addEventListener('click',paint)
+    painBtn.addEventListener('click',draw)
     rainbowBtn.addEventListener('click',rainbow)
-
-
+    darkerBtn.addEventListener('click',darker);
+    lighterBtn.addEventListener('click',lighter);
 
     paint();
    
