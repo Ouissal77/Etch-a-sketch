@@ -11,27 +11,35 @@
 </head>
 <body>
     <h1>Etch-a-Sketch</h1>
-    <div class="SliderContainer">
-        <label for="range">16 x 16</label>
-        <input type="range" min="1" max="64" value="16" id="mySlider" ></div>
+   
     
 
     <div class="center">
          
         <div class="Mode">
-            <input id="colorPicker" type="color" value="#333333">
-            <button>Color Mode</button>
-            <button>Rainbow Mode</button>
-            <button>Darker</button>
-            <button>lighter</button>
+            <input id="colorPicker" type="color" value="#000000">
+            <button id="paintBtn" class="active">Paint</button>
+            <button id="rainbow">Rainbow</button>
+            <button id="darker">Darker</button>
+            <button id="lighter">lighter</button>
     
         </div>
+        <div class="smtg">
+            <div class="topContainer">
+                <button class="topBtn" id="eraser">Eraser</button>
+                <div class="SliderContainer">
+                    <label for="range">16 x 16</label>
+                    <input type="range" min="1" max="64" value="16" id="mySlider" >
+                </div>
+                <button class="topBtn" id="clear">Clear</button>
+            </div>
+           <div class="container"> </div>
+        </div>
         
-       <div class="container"> </div>
     
        <div class="clearing">
-        <button>Eraser</button>
-        <button id="clear">Clear</button>
+        
+       
        </div>
 
     </div>

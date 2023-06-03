@@ -1,3 +1,6 @@
+body{
+    background-color: #364050;
+}
 
 input[type="color"] {
     /* CSS styles for the input element of type color */
@@ -9,6 +12,7 @@ input[type="color"] {
     width: 80px;
     border: none;
     background: none;
+    cursor: pointer;
     
   }
   input[type='color']::-webkit-color-swatch-wrapper {
@@ -24,7 +28,9 @@ input[type="color"] {
 h1{
     text-align: center;
     margin: 0;
-    padding-top: 50px ;
+    padding-top: 5px ;
+    padding-bottom: 5px;
+    color: #afc4ff;
 }
 .container{
     display: flex;
@@ -32,7 +38,7 @@ h1{
     width:500px;
     height: 500px;
     background-color: rgb(247, 245, 245);
-    margin: 40px auto ;
+    margin: 15px auto ;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
     user-select: none;
 }
@@ -41,8 +47,10 @@ button{
     width: 100%;
     font-size: 20px;
     padding: 10px 20px;
-  border: 1px solid var(--primary-dark);
+  border: 1px solid rgb(154, 220, 234);
   border-radius: 5px;
+  cursor: pointer;
+ 
 }
 .Mode, .clearing{
     width: 180px;
@@ -62,7 +70,7 @@ button{
     margin: 0 auto;
 }
 .SliderContainer{
-    margin-top: 50px;
+    padding-top: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,11 +80,66 @@ button{
 #mySlider{
    
     width: 180px;
-    
+    color: black;
        
 }
 
 label{
     text-align: center;
     font-size: 20px;
+    
 }
+
+.smtg{
+    background-color: rgb(103, 144, 144);
+    width: 600px;
+    border-radius: 15px;
+    padding-top: 5px;
+    
+}
+.topContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10px;
+}
+.topBtn{
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+input[type="range"] {
+    -webkit-appearance: none; /* Remove default styles */
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background-color: #afc4ff;
+    border-radius: 5px;
+  }
+  
+  /* Thumb styles */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styles */
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #252631;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  
+  .active{
+    background-color: rgb(224, 165, 175);
+  }
+  button:hover,
+  input[type='color']:hover {
+    transform: scale(1.05);
+    
+  }
+  button:hover{
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
+  }
