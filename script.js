@@ -71,6 +71,7 @@ function clear(){
     grid.style.backgroundColor = bgColor;
     console.log(getComputedStyle(grid).backgroundColor)
   });
+  paint();
 }
 
 function erase(){
@@ -255,7 +256,8 @@ function lighter(){
     darkerBtn.addEventListener('click',darker);
     lighterBtn.addEventListener('click',lighter);
 
-
+// paint is the function that adapt changes ofcolor or grids o the drawing , it should be called at first 
+// or when slider change so tht when the modes are called they get the changes updated
     function paint(){
       currenColor=colorPicker.value
 
